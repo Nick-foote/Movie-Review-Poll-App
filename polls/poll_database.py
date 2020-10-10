@@ -94,7 +94,6 @@ def get_polls(connection) -> List[Poll]:
         return cursor.fetchall()
 
 
-
 def get_poll(connection, poll_id: int) -> Poll:
     """Poll Type = Tuple[int, str, int] and not the Models class Poll"""
     with get_cursor(connection) as cursor:
