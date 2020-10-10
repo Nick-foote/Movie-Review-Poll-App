@@ -10,3 +10,4 @@ After sharing movie reviews the user can then vote on movie polls, such as best 
 
 <img width="750" alt="movie_database_05" src="https://user-images.githubusercontent.com/68865367/95657561-f867d700-0b0c-11eb-87ab-3c4379924014.png">
 
+Movies, reviews and polls are all accessed via PostGreSQL, using a connection pool.
