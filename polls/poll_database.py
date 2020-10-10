@@ -56,7 +56,7 @@ SELECT_POLL_OPTION_VOTES = """
     WHERE poll_id = %s
     GROUP BY options.id
 ;"""
-
+GET_POLL_TITLE = "SELECT title FROM polls WHERE id = %s;"
 
 # -- Functions --
 
@@ -80,6 +80,12 @@ def create_poll(connection, poll_title: str, owner: str):
         cursor.execute(INSERT_POLL_RETURN_ID, (poll_title, owner))
         poll_id = cursor.fetchone()[0]
         return poll_id
+
+
+def get_poll_title(connection, poll_id):
+    with get_cursor(connection) as cursor:
+        cursor.execute(GET_POLL_TITLE, (poll_id, ))
+        return cursor.fetchone()[0]
 
 
 def get_polls(connection) -> List[Poll]:
@@ -126,7 +132,7 @@ def add_vote(connection, username: str, vote_timestamp: float, option_id: int):
 
 def get_votes_for_option(connection, option_id: int) -> List[Vote]:
     with get_cursor(connection) as cursor:
-        cursor.execute(SELECT_VOTES_FOR_OPTION, (option_id,))
+        cursor.execute(SELECT_VOTES_FOR_OPTION, (option_id, ))
         return cursor.fetchall()
 
 
