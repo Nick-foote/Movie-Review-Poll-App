@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
+from polls import poll_database
 
 
-def get_pie_chart(options):
+def get_pie_chart(connection, options: str, poll_id: int):
     """Creates pie graph with each part based on the amount of votes each option has"""
+
+    title = poll_database.get_poll_title(connection, poll_id)
 
     figure = plt.figure(figsize=(10, 10))
     axes = figure.add_subplot(1, 1, 1)
@@ -11,10 +14,11 @@ def get_pie_chart(options):
         labels=[option[0] for option in options],
         autopct="%1.1f%%"
     )
+    axes.set_title(title)
     return figure
 
 
-def create_polls_bar_chart(polls):
+def create_polls_bar_chart(polls: str):
     """Creates a bar graph based on the amount of votes each poll has"""
 
     figure = plt.figure(figsize=(8, 5))
